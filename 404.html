@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Workreel</title>
+    <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
+    <style id="expo-reset">
+      /* These styles make the body full-height */
+      html,
+      body {
+        height: 100%;
+      }
+      /* These styles disable body scrolling if you are using <ScrollView> */
+      body {
+        overflow: hidden;
+      }
+      /* These styles make the root element full-height */
+      #root {
+        display: flex;
+        height: 100%;
+        flex: 1;
+      }
+    </style>
+  <meta name="theme-color" content="#17803F">
+<link rel="icon" href="favicon.ico"/>
+    <style id="wr-base">
+      :root { --wr-bg: #F4F7F5; --wr-ink: #16201B; }
+      html, body { background: var(--wr-bg); color: var(--wr-ink); margin: 0; }
+      body { -webkit-tap-highlight-color: transparent; }
+    </style>
+    <meta name="description" content="Hospitality jobs with optional video CVs." />
+</head>
+
+  <body>
+    <!-- Use static rendering with Expo Router to support running without JavaScript. -->
+    <noscript> You need to enable JavaScript to run this app. </noscript>
+    <!-- The root element for your Expo app. -->
+    <div id="root"></div>
+  
+
+  <script>/*
+ * Keeps the page's real address fixed while the app navigates.
+ * The hosting frame serves files only from the page's own folder, so a reload
+ * at an app route ("/home") would find nothing. The app's route lives in the
+ * hash instead ("…/#/home"); the router reads and writes it through these
+ * stand-ins for window.location and window.history.
+ */
+(function () {
+  var real = window.location, h = window.history;
+  var base = real.pathname;
+  // Sign-in links from email land here as "#access_token=…" (or "#error=…").
+  // Keep that for the app, then clean the address so routing starts at home.
+  if (/^#(access_token|error)=/.test(real.hash)) {
+    window.__WR_AUTH_HASH__ = real.hash.slice(1);
+    try { h.replaceState(null, '', base + real.search + '#/'); } catch (e) {}
+  }
+  window.__WR_BASE__ = base.replace(/[^/]*$/, '');
+  function route() {
+    var r = real.hash.indexOf('#/') === 0 ? real.hash.slice(1) : '/';
+    var q = r.indexOf('?');
+    return { pathname: q < 0 ? r : r.slice(0, q), search: q < 0 ? '' : r.slice(q) };
+  }
+  function toRoute(url) {
+    if (url == null || url === '') return null;
+    var u = new URL(String(url), real.origin + route().pathname + route().search);
+    return u.pathname + u.search;
+  }
+  function realUrl(r) { return base + real.search + '#' + r; }
+  var loc = {
+    get pathname() { return route().pathname; },
+    get search() { return route().search; },
+    get hash() { return ''; },
+    get href() { var r = route(); return real.origin + r.pathname + r.search; },
+    set href(v) { real.href = v; },
+    get origin() { return real.origin; },
+    get protocol() { return real.protocol; },
+    get host() { return real.host; },
+    get hostname() { return real.hostname; },
+    get port() { return real.port; },
+    assign: function (v) { real.assign(v); },
+    replace: function (v) { real.replace(v); },
+    reload: function () { real.reload(); },
+    toString: function () { return this.href; },
+  };
+  function write(kind, state, url) {
+    var r = toRoute(url);
+    var target = r ? realUrl(r) : undefined;
+    try { h[kind](state, '', target); } catch (e) { if (r) real.hash = r; }
+  }
+  var hist = {
+    get state() { return h.state; },
+    get length() { return h.length; },
+    get scrollRestoration() { return h.scrollRestoration; },
+    set scrollRestoration(v) { try { h.scrollRestoration = v; } catch (e) {} },
+    pushState: function (s, t, u) { write('pushState', s, u); },
+    replaceState: function (s, t, u) { write('replaceState', s, u); },
+    go: function (n) { h.go(n); },
+    back: function () { h.back(); },
+    forward: function () { h.forward(); },
+  };
+  window.__WR_LOC__ = loc;
+  window.__WR_HIST__ = hist;
+})();
+</script>
+  <script>
+    (function () {
+      var s = document.createElement('script');
+      s.src = 'app/entry-a3baf661244a7c918a9e89c671f242d8.js';
+      s.defer = true;
+      document.body.appendChild(s);
+    })();
+  </script>
+</body>
+</html>
